@@ -20,20 +20,20 @@ public class InvitationServiceImpl implements InvitationService {
 
     @Override
     public void sendInvitation(String email, Long projectId) throws MessagingException {
-        String invitationToken = UUID.randomUUID().toString();
-        Invitation invitation  =new Invitation();
+        String invitationToken= UUID.randomUUID().toString();
+        Invitation invitation=new Invitation();
+
         invitation.setEmail(email);
-        invitation.setPorjectId(projectId);
+        invitation.setProjectId(projectId);
         invitation.setToken(invitationToken);
 
         invitationRepository.save(invitation);
-
-        String invitationLink = "http://localhost:5173/accept_invitation?token="+invitationToken;
-        emailService.sendEmailWithToken(email, invitationLink);
+        String invitationLink="http://localhost:5173/accept_invitaion?token="+invitationToken;
+        emailService.sendEmailWithToken(email,invitationLink);
     }
 
     @Override
-    public Invitation accepInvitation(String token, Long userId) throws Exception {
+    public Invitation acceptInvitation(String token, Long userId) throws Exception {
         Invitation invitation = invitationRepository.findByToken(token);
         if(invitation == null) {
             throw new Exception("Invitation not found");

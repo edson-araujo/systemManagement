@@ -56,8 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
         if (tag != null){
-            projects = projects.stream().filter(project -> project.getTags().equals(tag))
-                    .collect(Collectors.toList());
+            projects = projects.stream().filter(project->project.getTags().contains(tag)).toList();
         }
         return projects;
     }

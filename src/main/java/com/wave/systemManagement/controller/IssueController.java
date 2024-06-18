@@ -21,14 +21,12 @@ public class IssueController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/issueId")
-    public ResponseEntity<List<Issue>> getIssueById(@PathVariable  Long projectId) throws Exception {
-        return ResponseEntity.ok(issueService.getIssueByProjectId(projectId));
+    @GetMapping("/{issueId}")
+    public ResponseEntity<Issue> getIssueById(@PathVariable Long issueId)throws Exception{
+        return ResponseEntity.ok(issueService.getIssuesById(issueId));
     }
-
     @GetMapping("/project/{projectId}")
-    public ResponseEntity<List<Issue>> getIssueByProjectId(
-            @PathVariable Long projectId) throws Exception {
+    public ResponseEntity<List<Issue>> getIssueByProjectId(@PathVariable Long projectId)throws Exception{
         return ResponseEntity.ok(issueService.getIssueByProjectId(projectId));
     }
 

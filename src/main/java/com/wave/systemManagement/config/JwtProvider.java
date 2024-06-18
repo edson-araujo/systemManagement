@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.Date;
 
 public class JwtProvider {
-    static SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    static SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
 
     public static String generateToken(Authentication auth){
 
@@ -24,7 +24,8 @@ public class JwtProvider {
     }
 
     public static String getEmailFromToken(String jwt){
-        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJwt(jwt).getBody();
+        jwt = jwt.substring(7);
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
         return String.valueOf(claims.get("email"));
     }
 }

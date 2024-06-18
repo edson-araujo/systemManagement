@@ -16,20 +16,21 @@ public class EmailServiceImpl implements EmailService {
     private JavaMailSender javaMailSender;
     @Override
     public void sendEmailWithToken(String userEmail, String link) throws MessagingException {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "urf-8");
+        MimeMessage mimeMessage=javaMailSender.createMimeMessage();
+        MimeMessageHelper helper=new MimeMessageHelper(mimeMessage,"utf-8");
 
-        String subject = "Join Porject Team Invocation";
-        String text = "Click the link to join the project team: " + link;
+        String subject="About Joining Project Team";
+        String text="Click The Link To Join Project Team: "+link;
 
         helper.setSubject(subject);
-        helper.setText(text, true);
+        helper.setText(text);
         helper.setTo(userEmail);
 
         try {
             javaMailSender.send(mimeMessage);
-        } catch (MailSendException e){
-            throw new MailSendException("Faild to send email");
+        }
+        catch (MailSendException e){
+            throw  new MailSendException("Failed to send the email");
         }
     }
 }

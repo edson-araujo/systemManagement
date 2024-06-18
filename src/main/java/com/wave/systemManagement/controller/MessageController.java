@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/api/message")
+@RequestMapping("/api/messages")
 public class MessageController {
     @Autowired
     private MessageService messageService;
