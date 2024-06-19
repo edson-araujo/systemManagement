@@ -28,7 +28,7 @@ public class InvitationServiceImpl implements InvitationService {
         invitation.setToken(invitationToken);
 
         invitationRepository.save(invitation);
-        String invitationLink="http://localhost:5173/accept_invitaion?token="+invitationToken;
+        String invitationLink="http://systemmanagementedson.s3-website.us-east-2.amazonaws.com/accept_invitaion?token="+invitationToken;
         emailService.sendEmailWithToken(email,invitationLink);
     }
 
